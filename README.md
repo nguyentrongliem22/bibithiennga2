@@ -129,7 +129,12 @@ Dự án đã được tạo sẵn tệp cấu hình chuẩn `vercel.json` đị
    - **Root Directory:** `./`
    - **Build Command:** `npm run build`
    - **Output Directory:** `dist`
-5. Nhấn **"Deploy"**. Trong vòng chưa đầy 1 phút, trang web của trường sẽ chính thức hoạt động trên toàn cầu với địa chỉ HTTPS miễn phí dạng `https://bibi-thien-nga-preschool.vercel.app`.
+5. **Cấu hình biến môi trường trên Vercel (Settings ➔ Environment Variables):**
+   - `CLOUDFLARE_R2_BUCKET_NAME`: `bibimage`
+   - `CLOUDFLARE_R2_ACCESS_KEY_ID`: `107d30faa8cb1be27273b8e1a611a9bd`
+   - `CLOUDFLARE_R2_SECRET_ACCESS_KEY`: `b612c1ae67447c0257f914024ec3280429c1d3232e9f02df95fcb23d4b7aaa25`
+   - `CLOUDFLARE_R2_ENDPOINT`: `https://9aadbfa437c0a55ce58fdef80f8b4471.r2.cloudflarestorage.com`
+6. Nhấn **"Deploy"**. Trong vòng chưa đầy 1 phút, trang web của trường sẽ chính thức hoạt động trên toàn cầu với địa chỉ HTTPS miễn phí dạng `https://bibi-thien-nga-preschool.vercel.app`.
 
 ### Cách 2: Triển khai qua Vercel CLI
 ```bash

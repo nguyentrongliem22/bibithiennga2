@@ -76,8 +76,11 @@ import {
   ShieldCheck,
   Award,
   Layers,
-  Heart
+  Heart,
+  Cloud
 } from 'lucide-react';
+import { ImageUploadWidget } from '../common/ImageUploadWidget';
+import { AdminR2Storage } from './AdminR2Storage';
 
 interface AdminPortalProps {
   data: KindergartenState;
@@ -87,6 +90,7 @@ interface AdminPortalProps {
 
 type AdminTab =
   | 'overview'
+  | 'r2storage'
   | 'school'
   | 'classes'
   | 'menu'
@@ -593,6 +597,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               <nav className="space-y-1">
                 {[
                   { id: 'overview', label: 'Tổng quan & Thống kê', icon: LayoutDashboard },
+                  { id: 'r2storage', label: 'Lưu trữ R2 Cloudflare', icon: Cloud },
                   { id: 'inquiries', label: 'Hồ sơ tuyển sinh', icon: Inbox, badge: data.inquiries.filter(i => i.status === 'new').length },
                   { id: 'school', label: 'Thông tin trường', icon: Building },
                   { id: 'classes', label: 'Khối lớp & Học phí', icon: Layers, badge: data.classes.length },
@@ -769,6 +774,17 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                   </button>
                 </div>
               </div>
+            )}
+
+            {/* R2 CLOUDFLARE STORAGE TAB */}
+            {activeTab === 'r2storage' && (
+              <AdminR2Storage
+                onShowToast={showToast}
+                onAddGalleryItem={(item) => {
+                  const updated = addGalleryItem(data, item);
+                  onUpdateState(updated);
+                }}
+              />
             )}
 
             {/* 2. SCHOOL INFO TAB */}
@@ -1577,12 +1593,11 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Link ảnh đại diện lớp</label>
-                <input
-                  type="text"
+                <ImageUploadWidget
+                  label="Hình ảnh đại diện khối lớp"
                   value={classForm.imageUrl}
-                  onChange={(e) => setClassForm({ ...classForm, imageUrl: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-[11px]"
+                  onChange={(url) => setClassForm({ ...classForm, imageUrl: url })}
+                  folder="classes"
                 />
               </div>
 
@@ -1788,12 +1803,11 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Link ảnh chân dung</label>
-                <input
-                  type="text"
+                <ImageUploadWidget
+                  label="Ảnh chân dung giáo viên"
                   value={teacherForm.avatarUrl}
-                  onChange={(e) => setTeacherForm({ ...teacherForm, avatarUrl: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-[11px]"
+                  onChange={(url) => setTeacherForm({ ...teacherForm, avatarUrl: url })}
+                  folder="teachers"
                 />
               </div>
 
@@ -1873,12 +1887,11 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Link ảnh bìa bài viết</label>
-                <input
-                  type="text"
+                <ImageUploadWidget
+                  label="Ảnh bìa bài viết"
                   value={newsForm.coverImage}
-                  onChange={(e) => setNewsForm({ ...newsForm, coverImage: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-[11px]"
+                  onChange={(url) => setNewsForm({ ...newsForm, coverImage: url })}
+                  folder="news"
                 />
               </div>
 
@@ -1959,14 +1972,12 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 mb-1">Link URL ảnh *</label>
-                <input
-                  type="text"
-                  required
+                <ImageUploadWidget
+                  label="Tải ảnh lên R2 / Liên kết ảnh"
                   value={galleryForm.imageUrl}
-                  onChange={(e) => setGalleryForm({ ...galleryForm, imageUrl: e.target.value })}
-                  placeholder="https://..."
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-[11px]"
+                  onChange={(url) => setGalleryForm({ ...galleryForm, imageUrl: url })}
+                  folder="gallery"
+                  required
                 />
               </div>
 
