@@ -2,5 +2,7 @@
   "name": "Mầm non BiBi Thiên Nga - STEAM Preschool",
   "description": "Website chính thức và Cổng quản trị Trường Mầm non BiBi Thiên Nga STEAM Preschool (Cẩm Lệ, Đà Nẵng) với phương pháp giáo dục hiện đại.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

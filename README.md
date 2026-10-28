@@ -102,13 +102,13 @@ git init
 git add .
 
 # Tạo commit đầu tiên
-git commit -m "feat: website truong mam non BiBi Thien Nga Steam Preschool kem trang admin"
+git commit -m "fix: resolve esbuild peer dependency conflict for vercel deployment"
 
 # Đổi nhánh chính thành main
 git branch -M main
 
-# Liên kết với repository GitHub của bạn
-git remote add origin https://github.com/<tai-khoan-cua-ban>/bibi-thien-nga-preschool.git
+# Liên kết với repository GitHub của bạn (nếu chưa liên kết)
+git remote add origin https://github.com/nguyentrongliem22/bibithiennga2.git
 
 # Đẩy code lên GitHub
 git push -u origin main
